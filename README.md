@@ -14,6 +14,22 @@ for monitoring and metrics.
 * **Cassandra** up and running
 * **PyCassa** library installed
 
+### Configuration
+
+You can override **wigo** default settings, whose which should never be used on production environment, by follow these two simple steps:
+
+1º. Create a configuration file with new settings:
+
+    # /etc/wigo/production.config
+	
+	DEBUG = False
+	TESTING = False
+	CASSANDRA_URI = 'production.cassandra.wigo:9160'
+
+2º. Set an environment variable pointing to that file:
+
+	$ WIGO_SETTINGS=/etc/wigo/production.config python wigo.py
+
 ## License
 
 This software is licensed under the MIT license.
