@@ -30,6 +30,8 @@ You can override **wigo** default settings, whose which should never be used on 
 
 	$ WIGO_SETTINGS=/etc/wigo/production.config python wigo.py
 
+Of course, you might create different settings for each environment you target to run it, e.g. test, systems integration.
+
 ## License
 
 This software is licensed under the MIT license.
