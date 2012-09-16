@@ -11,8 +11,14 @@ for monitoring and metrics.
 
 ### Requirements
 
-* **Cassandra** up and running
-* **PyCassa** library installed
+* [**Cassandra**](http://wiki.apache.org/cassandra/GettingStarted) up and running
+* [**Flask**](http://flask.pocoo.org) and [**PyCassa**](https://github.com/pycassa/pycassa) libraries installed
+
+### Installation and running
+
+    $ git clone https://github.com/leandrosilva/wigo.git
+    $ cd wigo
+    $ python wigo.py
 
 ### Configuration
 
