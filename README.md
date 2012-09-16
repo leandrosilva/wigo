@@ -9,6 +9,8 @@ for monitoring and metrics.
 
 * TODO
 
-## Copyright
+## License
 
-MIT License. Copyright (c) 2012 Leandro Silva (CødeZøne) <leandrodoze@gmail.com>.
+This software is licensed under the MIT license.
+
+Copyright (c) 2012 Leandro Silva (CødeZøne) <leandrodoze@gmail.com>.
