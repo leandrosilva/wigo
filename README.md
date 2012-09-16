@@ -9,6 +9,11 @@ for monitoring and metrics.
 
 * TODO
 
+### Requirements
+
+* **Cassandra** up and running
+* **PyCassa** library installed
+
 ## License
 
 This software is licensed under the MIT license.
