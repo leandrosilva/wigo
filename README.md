@@ -40,7 +40,7 @@ Of course, you might create different settings for each environment you target t
 
 ## Documentation
 
-* API
+* [API](https://github.com/leandrosilva/wigo/blob/master/docs/APIDOC.md)
 * Dashboard
 
 ## License
