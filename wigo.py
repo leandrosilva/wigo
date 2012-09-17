@@ -12,7 +12,8 @@
 
 import wigo
 
-from flask import Flask, request, session, url_for, redirect, render_template, abort, g, flash
+from flask import Flask, request, session, url_for, redirect, render_template, \
+                  abort, g, flash, jsonify
 
 app = Flask(__name__)
 app.config.from_object('wigo.config.DefaultSettings')
@@ -48,7 +49,7 @@ def dashboard_index():
 
 @app.route('/api/ping')
 def api_ping():
-    return '{return: pong}'
+    return jsonify(result='pong')
 
 #
 # Here we go!
