@@ -6,13 +6,13 @@ This is the documentation of wigo's web API.
 
 Wigo API is a REST-like web API with JSON payload, which means that every single request/response is based on HTTP verbs and JSON data.
 
-Wigo aims to be used to keep track of state machines, allowing monitoring and actions over metrics. This means you can define thresholds for each state of a state machine and then trigger actions based on them, like notify Nagios, post to a web service, and so on.
+Wigo aims to be used to keep track of state machines, allowing to build monitoring dashboards and also taking action over metrics. This means one can define thresholds for each state of a given state machine and then trigger actions based on them, like notify Nagios, post to a web service, or something like so.
 
-Some use cases might be:
+Some use cases that might come in mind are:
 
-* Product provisioning systems
 * Ordering systems
 * Anti-Fraud systems
+* Product provisioning systems
 
 ### An Imaginary Product Provisioning System
 
@@ -32,13 +32,13 @@ If you're not familiarised with this kind of system, essentially they work like 
 
 Let's see some examples:
 
-**Example 1:**
+**Example 1**
 
     T1                       T2
     |------------------------|
     #1 Waiting Payment       #3 Cancelled
 
-**Example 2:**
+**Example 2**
 
     T1                       T2                       T3                       T4
     |------------------------|------------------------|------------------------|
@@ -48,6 +48,18 @@ Let's see some examples:
     |------------------------|------------------------|------------------------|------------------------|
     #6 Waiting Deactivation  #4 Active                #6 Waiting Deactivation  #7 Deactivated           #3 Cancelled
 
+**Example 3**
+
+    T1                       T2                       T3                       T4
+    |------------------------|------------------------|------------------------|
+    #1 Waiting Payment       #2 Waiting Activating    #4 Activating            #5 Active
+
+    T5                       T6                       T7
+    |------------------------|------------------------|
+    #6 Waiting Deactivation  #7 Deactivated           #3 Cancelled
+
+OK. So now I think we have matter to go forward and walk through the API.
+
 ## Settings
 
 * TODO
@@ -56,20 +68,34 @@ Let's see some examples:
 
 **Request:**
 
-    POST /api/setup/statemachine/new
+    POST /api/statemachines
     
     {
-        "id": "PROVISIONING"
-        "name": "Product Provisioning",
+        "name": "Provisioning",
+        "description": "Simple Product Provisioning State Machine",
         "states": [{
-            "id": "1"
-            "name": "Waiting Payment",
-            "next": ["2", "3"]
+            "name": "#1 Waiting Payment",
+            "next": ["#2 Waiting Activation", "#3 Cancelled"]
         }, {
-            
+            "name": "#2 Waiting Activation",
+            "next": ["#4 Activating"]
+        }, {
+            "name": "#3 Cancelled"
+        }, {
+            "name": "#4 Activating",
+            "next": ["#5 Active"]
+        }, {
+            "name": "#5 Active",
+            "next": ["#6 Waiting Deactivation"]
+        }, {
+            "name": "#6 Waiting Deactivation",
+            "next": ["#5 Active", "#7 Deactivated"]
+        }, {
+            "name": "#7 Deactivated",
+            "next": ["#3 Cancelled"]
         }]
     }
-
+    
 **Response:**
 
     {

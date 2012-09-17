@@ -63,7 +63,7 @@ def dashboard_index():
 def api_ping():
     return jsonify(result='pong')
 
-@app.route('/api/statemachines/new', methods=['POST'])
+@app.route('/api/statemachines', methods=['POST'])
 def api_new_state_machine():
     payload = request.json
     app.logger.info('>> new state machine: %s', payload['name'])
