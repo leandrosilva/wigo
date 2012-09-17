@@ -5,7 +5,7 @@ curl -i \
      -H "Content-type: application/json" \
      -d '
 {
-    "name": "provisioning",
+    "name": "Provisioning",
     "description": "Simple Product Provisioning State Machine",
     "states": [{
         "name": "1_waiting_payment",

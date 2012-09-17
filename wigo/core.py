@@ -10,8 +10,8 @@
     :license: MIT.
 """
 
-from pycassa import ConnectionPool, ColumnFamily, NotFoundException
-from pycassa.system_manager import SystemManager
+from wigo.config import Settings
+from wigo.database import Cassandra
 
 #
 # Error
@@ -26,7 +26,7 @@ class Error(Exception):
 
 class MetadataError(Error):
     pass
-
+    
 #
 # Model
 #
@@ -67,6 +67,9 @@ class StateMachine:
         
         return [State(state_metadata) for state_metadata in states_metadata]
     
+    def __get_column_name(self):
+        return 'SM_%s' % self.Name
+        
     def register_new(self):
         return self.Name
         

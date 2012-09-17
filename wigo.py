@@ -10,14 +10,23 @@
     :license: MIT.
 """
 
-from wigo.core import StateMachine
+from wigo.config import Settings
+from wigo.database import Cassandra
+from wigo.core import Cassandra, StateMachine
 
 from flask import Flask, request, session, url_for, redirect, render_template, \
                   abort, g, flash, jsonify, Response
 
+#
+# Settings
+#
+
 app = Flask(__name__)
 app.config.from_object('wigo.config.DefaultSettings')
 app.config.from_envvar('WIGO_SETTINGS', silent=True)
+
+Settings.reset(app.config)
+Cassandra.setup()
 
 #
 # Error handling

@@ -71,7 +71,7 @@ OK. So now I think we have matter to go forward and walk through the API.
     POST /api/statemachines
     
     {
-        "name": "provisioning",
+        "name": "Provisioning",
         "description": "Simple Product Provisioning State Machine",
         "states": [{
             "name": "1_waiting_payment",
