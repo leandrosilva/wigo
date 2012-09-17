@@ -18,11 +18,41 @@ app = Flask(__name__)
 app.config.from_object('wigo.config.DefaultSettings')
 app.config.from_envvar('WIGO_SETTINGS', silent=True)
 
+#
+# General
+#
+
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return redirect(url_for('dashboard_index'))
 
-### Here we go!
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return render_template('500.html'), 500
+
+#
+# Dashboard
+#
+
+@app.route('/dashboard')
+def dashboard_index():
+    return render_template('dashboard/index.html')
+
+#
+# API
+#
+
+@app.route('/api/ping')
+def api_ping():
+    return '{return: pong}'
+
+#
+# Here we go!
+#
 
 if __name__ == '__main__':
     app.run()
