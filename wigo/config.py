@@ -10,7 +10,7 @@
     :license: MIT.
 """
 
-class Settings:
+class Settings(object):
     DEBUG = False
     TESTING = False
     CASSANDRA_URI = None

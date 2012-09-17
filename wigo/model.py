@@ -24,7 +24,7 @@ class MetadataError(Error):
 # Model
 #
 
-class State:
+class State(object):
     def __init__(self, metadata):
         self.__metadata = metadata
         self.__validate()
@@ -40,7 +40,7 @@ class State:
         if not 'name' in self.__metadata:
             raise MetadataError('States should have a name.')
 
-class StateMachine:
+class StateMachine(object):
     def __init__(self, metadata):
         self.__metadata = metadata
         self.__validate()
