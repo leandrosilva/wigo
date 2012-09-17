@@ -38,6 +38,11 @@ You can override **wigo** default settings, whose which should never be used on 
 
 Of course, you might create different settings for each environment you target to run it, e.g. test, systems integration.
 
+## Documentation
+
+* API
+* Dashboard
+
 ## License
 
 This software is licensed under the MIT license.
