@@ -16,7 +16,7 @@ class Settings:
     CASSANDRA_URI = None
     
     @classmethod
-    def reset(clazz, settings):
+    def override(clazz, settings):
         clazz.DEBUG = settings['DEBUG']
         clazz.TESTING = settings['TESTING']
         clazz.CASSANDRA_URI = settings['CASSANDRA_URI']

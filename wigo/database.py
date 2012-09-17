@@ -12,6 +12,8 @@
 
 from wigo.config import Settings
 
+from flask import g
+
 from pycassa import ConnectionPool, ColumnFamily, NotFoundException
 from pycassa.system_manager import SystemManager, SIMPLE_STRATEGY, UTF8_TYPE
 from pycassa.cassandra.ttypes import InvalidRequestException

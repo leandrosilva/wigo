@@ -23,14 +23,3 @@ class Error(Exception):
     
     def __str__(self):
         return message
-
-#
-# Initialization of the underling pieces
-#
-
-class Initializer:
-    @classmethod
-    def boot_for(clazz, app):
-        Settings.reset(app.config)
-        Cassandra.setup(Settings.CASSANDRA_URI)
-    
