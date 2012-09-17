@@ -2,8 +2,8 @@
 
 Wigo stands for **What is going on?**
 
-This is an application and API to keep track on state machines, which is quite useful
-for monitoring and metrics.
+This is an application and API to keep track on state machines and know at near real time what is going with them, what is quite useful
+for business monitoring and metrics.
 
 ## Getting Started
 
