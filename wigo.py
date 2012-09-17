@@ -66,7 +66,7 @@ def api_ping():
 @app.route('/api/statemachines/new', methods=['POST'])
 def api_new_state_machine():
     payload = request.json
-    app.log. '>> new state machine:', payload['name']
+    app.logger.info('>> new state machine: %s', payload['name'])
     return '', 201
 
 #
