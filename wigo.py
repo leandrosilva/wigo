@@ -10,10 +10,10 @@
     :license: MIT.
 """
 
-import wigo
+from wigo.core import StateMachine
 
 from flask import Flask, request, session, url_for, redirect, render_template, \
-                  abort, g, flash, jsonify
+                  abort, g, flash, jsonify, Response
 
 app = Flask(__name__)
 app.config.from_object('wigo.config.DefaultSettings')
@@ -65,9 +65,17 @@ def api_ping():
 
 @app.route('/api/statemachines', methods=['POST'])
 def api_new_state_machine():
+    app.logger.info(request.data)
+
     payload = request.json
-    app.logger.info('>> new state machine: %s', payload['name'])
-    return '', 201
+    
+    state_machine = StateMachine(metadata=payload)
+    state_machine.register_new()
+    
+    response = Response('', status=201, mimetype='application/json')
+    response.headers['Location'] = '/api/statemachines/%s' % state_machine.Name
+    
+    return response
 
 #
 # Here we go!

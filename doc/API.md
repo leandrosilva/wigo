@@ -71,28 +71,28 @@ OK. So now I think we have matter to go forward and walk through the API.
     POST /api/statemachines
     
     {
-        "name": "Provisioning",
+        "name": "provisioning",
         "description": "Simple Product Provisioning State Machine",
         "states": [{
-            "name": "#1 Waiting Payment",
-            "next": ["#2 Waiting Activation", "#3 Cancelled"]
+            "name": "1_waiting_payment",
+            "next": ["2_waiting_activation", "3_cancelled"]
         }, {
-            "name": "#2 Waiting Activation",
-            "next": ["#4 Activating"]
+            "name": "2_waiting_activation",
+            "next": ["4_activating"]
         }, {
-            "name": "#3 Cancelled"
+            "name": "3_cancelled"
         }, {
-            "name": "#4 Activating",
-            "next": ["#5 Active"]
+            "name": "4_activating",
+            "next": ["5_active"]
         }, {
-            "name": "#5 Active",
-            "next": ["#6 Waiting Deactivation"]
+            "name": "5_active",
+            "next": ["6_waiting_deactivation"]
         }, {
-            "name": "#6 Waiting Deactivation",
-            "next": ["#5 Active", "#7 Deactivated"]
+            "name": "6_waiting_deactivation",
+            "next": ["5_active", "7_deactivated"]
         }, {
-            "name": "#7 Deactivated",
-            "next": ["#3 Cancelled"]
+            "name": "7_deactivated",
+            "next": ["3_cancelled"]
         }]
     }
     
