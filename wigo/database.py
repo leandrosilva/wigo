@@ -23,8 +23,8 @@ class Cassandra:
     __ERROR_CF_STATEMACHINES_ALREADY_EXISTS = "Cannot add already existing column family 'StateMachines' to keyspace 'wigo'."
     
     @classmethod
-    def setup(clazz):
-        clazz.__URI = Settings.CASSANDRA_URI
+    def setup(clazz, CASSANDRA_URI):
+        clazz.__URI = CASSANDRA_URI
         
         system_manager = clazz.new_system_manager()
         
