@@ -21,16 +21,25 @@ class Database(object):
     def setup(clazz, CASSANDRA_URI):
         clazz.__URI = CASSANDRA_URI
         
-        database = Database()
-        database.__init_schema()
-        database.close()
+        with Database.open() as database:
+            database.__init_schema()
     
     @classmethod
-    def new_session(clazz):
+    def open(clazz):
+        return Database(SystemManager(clazz.__URI))
+    
+    @classmethod
+    def open_session(clazz):
         return Session(ConnectionPool('wigo', server_list=[clazz.__URI]))
     
-    def __init__(self):
-        self.__system_manager = SystemManager(self.__URI)
+    def __init__(self, system_manager):
+        self.__system_manager = system_manager
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, type, value, traceback):
+        self.close()
     
     def close(self):
         self.__system_manager.close()
@@ -50,10 +59,7 @@ class Database(object):
             else:
                 raise e
     
-    def __create_column_families(self):
-        self.create_column_family('StateMachines')
-        
-    def create_column_family(self, name, comparator_type=UTF8_TYPE):
+    def __create_column_family(self, name, comparator_type=UTF8_TYPE):
         ERROR_CF_ALREADY_EXISTS = "Cannot add already existing column family '%s' to keyspace 'wigo'." % name
 
         try:
@@ -63,14 +69,22 @@ class Database(object):
                 pass
             else:
                 raise e
-
+    
+    def __create_column_families(self):
+        self.__create_column_family('StateMachines')
+        
 class Session(object):
     def __init__(self, connection_pool):
         self.__connection_pool = connection_pool
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, type, value, traceback):
+        self.close()
     
     def get_column_family(self, name):
         return ColumnFamily(self.__connection_pool, name)
     
     def close(self):
         self.__connection_pool.dispose()
-
