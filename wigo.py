@@ -11,7 +11,7 @@
 """
 
 from wigo.cassandra import Database
-from wigo.core import StateMachine
+from wigo.store import StateMachine
 
 from flask import Flask, request, jsonify, Response
 
