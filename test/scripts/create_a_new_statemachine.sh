@@ -1,7 +1,7 @@
 #!/bin/sh
 
 curl -i \
-     -X POST http://127.0.0.1:5000/api/statemachines \
+     -X POST http://127.0.0.1:5000/statemachines \
      -H "Content-type: application/json" \
      -d '
 {

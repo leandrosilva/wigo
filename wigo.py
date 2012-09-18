@@ -13,8 +13,7 @@
 from wigo.cassandra import Database
 from wigo.core import StateMachine
 
-from flask import Flask, request, session, url_for, redirect, render_template, \
-                  abort, g, flash, jsonify, Response
+from flask import Flask, request, jsonify, Response
 
 #
 # Settings
@@ -32,11 +31,11 @@ Database.setup(app.config['CASSANDRA_URI'])
 
 @app.errorhandler(404)
 def not_found(error):
-    return render_template('404.html'), 404
+    return jsonify(message="Not Found", url=request.url), 404
 
 @app.errorhandler(500)
 def internal_server_error(error):
-    return render_template('500.html'), 500
+    return jsonify(message="Internal Server Error", url=request.url), 500
 
 #
 # Filtering
@@ -47,31 +46,15 @@ def before_request():
     pass
 
 #
-# General
-#
-
-@app.route('/')
-def home():
-    return redirect(url_for('dashboard_index'))
-
-#
-# Dashboard
-#
-
-@app.route('/dashboard')
-def dashboard_index():
-    return render_template('dashboard/index.html')
-
-#
 # API
 #
 
-@app.route('/api/ping')
-def api_ping():
-    return jsonify(result='pong')
+@app.route('/ping')
+def ping():
+    return jsonify(answer='pong')
 
-@app.route('/api/statemachines', methods=['POST'])
-def api_new_state_machine():
+@app.route('/statemachines', methods=['POST'])
+def new_state_machine():
     app.logger.info(request.data)
 
     payload = request.json
@@ -80,7 +63,7 @@ def api_new_state_machine():
     state_machine.register_new()
     
     response = Response('', status=201, mimetype='application/json')
-    response.headers['Location'] = '/api/statemachines/%s' % state_machine.Name
+    response.headers['Location'] = '/statemachines/%s' % state_machine.Name
     
     return response
 

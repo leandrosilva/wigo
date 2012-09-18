@@ -4,9 +4,9 @@ This is the documentation of wigo's web API.
 
 ## Introduction
 
-Wigo API is a REST-like web API with JSON payload, which means that every single request/response is based on HTTP verbs and JSON data.
+Wigo API is a REST-like Web API with JSON payload, which means that every single request/response is based on HTTP verbs and JSON data.
 
-Wigo aims to be used to keep track of state machines, allowing to build monitoring dashboards and also taking action over metrics. This means one can define thresholds for each state of a given state machine and then trigger actions based on them, like notify Nagios, post to a web service, or something like so.
+Wigo aims to be used to keep track of state machines, allowing to build monitoring dashboards from the data it provides and also to take automatic actions based on metrics. This means one can define thresholds for each state of a given state machine and then trigger actions based on them, like notify Nagios, post to a web service, or something like so.
 
 Some use cases that might come in mind are:
 

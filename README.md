@@ -2,7 +2,7 @@
 
 Wigo stands for **What is going on?**
 
-This is an application and API to keep track of state machines and to know at near real time what is going with them, what is quite useful for business monitoring and metrics.
+This is a Web API to keep track of state machines and to provide data at near real time about what is going with them, what is quite useful for business monitoring and metrics.
 
 ## Getting Started
 
@@ -40,7 +40,6 @@ Of course, you might create different settings for each environment you target t
 ## Documentation
 
 * [API](https://github.com/leandrosilva/wigo/blob/master/doc/API.md)
-* Dashboard
 
 ## License
 
