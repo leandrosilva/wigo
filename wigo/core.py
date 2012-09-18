@@ -32,22 +32,19 @@ class MetadataError(Error):
 
 class StateMachine(object):
     def __init__(self, metadata):
-        self.__metadata = metadata
-        self.__validate()
+        self.__validate(metadata)
         
         self.Name = metadata['name']
-        self.States = self.__build_states()
+        self.States = self.__build_states(metadata['states'])
     
-    def __validate(self):
-        if not 'name' in self.__metadata:
+    def __validate(self, metadata):
+        if not 'name' in metadata:
             raise MetadataError('State machines should have a name.')
         
-        if not 'states' in self.__metadata:
+        if not 'states' in metadata:
             raise MetadataError('State machines should have at least one state.')
     
-    def __build_states(self):
-        states_metadata = self.__metadata['states']
-        
+    def __build_states(self, states_metadata):
         return [State(state_metadata) for state_metadata in states_metadata]
     
     def __get_column_name(self):
@@ -58,8 +55,7 @@ class StateMachine(object):
     
 class State(object):
     def __init__(self, metadata):
-        self.__metadata = metadata
-        self.__validate()
+        self.__validate(metadata)
         
         self.Name = metadata['name']
         
@@ -68,6 +64,6 @@ class State(object):
         else:
             self.Next = None
     
-    def __validate(self):
-        if not 'name' in self.__metadata:
+    def __validate(self, metadata):
+        if not 'name' in metadata:
             raise MetadataError('States should have a name.')
