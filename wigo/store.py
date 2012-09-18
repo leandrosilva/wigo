@@ -13,15 +13,18 @@
 from wigo.core import Error
 from wigo.cassandra import Database, Session
 
+
 #
 # Error
 #
 
 class MetadataError(Error):
     pass
-    
+
+
 class StoringError(Error):
     pass
+
 
 #
 # Model
@@ -49,7 +52,8 @@ class StateMachine(object):
             state_machines_column_family = session.get_column_family('StateMachines')
             
         return self.Name
-    
+
+
 class State(object):
     def __init__(self, metadata):
         self.__validate(metadata)

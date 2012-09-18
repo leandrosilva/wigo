@@ -15,6 +15,7 @@ from wigo.store import StateMachine
 
 from flask import Flask, request, jsonify, Response
 
+
 #
 # Settings
 #
@@ -25,6 +26,7 @@ app.config.from_envvar('WIGO_SETTINGS', silent=True)
 
 Database.setup(app.config['CASSANDRA_URI'])
 
+
 #
 # Error handling
 #
@@ -33,9 +35,11 @@ Database.setup(app.config['CASSANDRA_URI'])
 def not_found(error):
     return jsonify(message="Not Found", url=request.url), 404
 
+
 @app.errorhandler(500)
 def internal_server_error(error):
     return jsonify(message="Internal Server Error", url=request.url), 500
+
 
 #
 # Filtering
@@ -45,6 +49,7 @@ def internal_server_error(error):
 def before_request():
     pass
 
+
 #
 # API
 #
@@ -52,6 +57,7 @@ def before_request():
 @app.route('/ping')
 def ping():
     return jsonify(answer='pong')
+
 
 @app.route('/statemachines', methods=['POST'])
 def new_state_machine():
@@ -66,6 +72,7 @@ def new_state_machine():
     response.headers['Location'] = '/statemachines/%s' % state_machine.Name
     
     return response
+
 
 #
 # Here we go!
