@@ -11,7 +11,7 @@
 """
 
 from wigo.config import Settings
-from wigo.database import Cassandra
+from wigo.cassandra import Database
 from wigo.model import StateMachine
 
 from flask import Flask, request, session, url_for, redirect, render_template, \
@@ -26,7 +26,7 @@ app.config.from_object('wigo.config.DefaultSettings')
 app.config.from_envvar('WIGO_SETTINGS', silent=True)
 
 Settings.override(app.config)
-Cassandra.setup(Settings.CASSANDRA_URI)
+Database.setup(Settings.CASSANDRA_URI)
 
 #
 # Error handling
