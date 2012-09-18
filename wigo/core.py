@@ -47,9 +47,6 @@ class StateMachine(object):
     def __build_states(self, states_metadata):
         return [State(state_metadata) for state_metadata in states_metadata]
     
-    def __get_column_name(self):
-        return 'SM_%s' % self.Name
-        
     def register_new(self):
         return self.Name
     
