@@ -26,27 +26,9 @@ class Cassandra(object):
             
     @classmethod
     def __create_schema(clazz):
-        ERROR_KS_WIGO_ALREADY_EXISTS = 'Keyspace names must be case-insensitively unique ("wigo" conflicts with "wigo")'
-        ERROR_CF_STATEMACHINES_ALREADY_EXISTS = "Cannot add already existing column family 'StateMachines' to keyspace 'wigo'."
-
         system_manager = clazz.new_system_manager()
-        
-        try:
-            system_manager.create_keyspace('wigo', SIMPLE_STRATEGY, {'replication_factor': '1'})
-        except InvalidRequestException as e:
-            if e.why == ERROR_KS_WIGO_ALREADY_EXISTS:
-                pass
-            else:
-                raise e
-
-        try:
-            system_manager.create_column_family('wigo', 'StateMachines', super=False, comparator_type=UTF8_TYPE)
-        except InvalidRequestException as e:
-            if e.why == ERROR_CF_STATEMACHINES_ALREADY_EXISTS:
-                pass
-            else:
-                raise e
-        
+        clazz.__create_wigo_keyspace(system_manager)
+        clazz.__create_statemachines_column_family(system_manager)
         system_manager.close()
     
     @classmethod
@@ -60,3 +42,31 @@ class Cassandra(object):
     @classmethod
     def new_connection_pool(clazz, keyspace):
         return ConnectionPool(keyspace, clazz.__URI)
+    
+    @classmethod
+    def create_column_family(clazz, system_manager, name, comparator_type=UTF8_TYPE):
+        ERROR_CF_ALREADY_EXISTS = "Cannot add already existing column family '%s' to keyspace 'wigo'." % name
+
+        try:
+            system_manager.create_column_family('wigo', name, super=False, comparator_type=comparator_type)
+        except InvalidRequestException as e:
+            if e.why == ERROR_CF_ALREADY_EXISTS:
+                pass
+            else:
+                raise e
+    
+    @classmethod
+    def __create_wigo_keyspace(clazz, system_manager):
+        ERROR_KS_ALREADY_EXISTS = 'Keyspace names must be case-insensitively unique ("wigo" conflicts with "wigo")'
+        
+        try:
+            system_manager.create_keyspace('wigo', SIMPLE_STRATEGY, {'replication_factor': '1'})
+        except InvalidRequestException as e:
+            if e.why == ERROR_KS_ALREADY_EXISTS:
+                pass
+            else:
+                raise e
+
+    @classmethod
+    def __create_statemachines_column_family(clazz, system_manager):
+        clazz.create_column_family(system_manager, 'StateMachines')
