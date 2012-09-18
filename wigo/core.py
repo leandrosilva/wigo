@@ -10,8 +10,7 @@
     :license: MIT.
 """
 
-from wigo.config import Settings
-from wigo.database import Cassandra
+from wigo.cassandra import Database, Session
 
 #
 # Error
@@ -30,22 +29,6 @@ class MetadataError(Error):
 #
 # Model
 #
-
-class State(object):
-    def __init__(self, metadata):
-        self.__metadata = metadata
-        self.__validate()
-        
-        self.Name = metadata['name']
-        
-        if 'next' in metadata:
-            self.Next = metadata['next']
-        else:
-            self.Next = None
-    
-    def __validate(self):
-        if not 'name' in self.__metadata:
-            raise MetadataError('States should have a name.')
 
 class StateMachine(object):
     def __init__(self, metadata):
@@ -72,3 +55,19 @@ class StateMachine(object):
         
     def register_new(self):
         return self.Name
+    
+class State(object):
+    def __init__(self, metadata):
+        self.__metadata = metadata
+        self.__validate()
+        
+        self.Name = metadata['name']
+        
+        if 'next' in metadata:
+            self.Next = metadata['next']
+        else:
+            self.Next = None
+    
+    def __validate(self):
+        if not 'name' in self.__metadata:
+            raise MetadataError('States should have a name.')

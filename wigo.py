@@ -10,7 +10,6 @@
     :license: MIT.
 """
 
-from wigo.config import Settings
 from wigo.cassandra import Database
 from wigo.core import StateMachine
 
@@ -25,8 +24,7 @@ app = Flask(__name__)
 app.config.from_object('wigo.config.DefaultSettings')
 app.config.from_envvar('WIGO_SETTINGS', silent=True)
 
-Settings.override(app.config)
-Database.setup(Settings.CASSANDRA_URI)
+Database.setup(app.config['CASSANDRA_URI'])
 
 #
 # Error handling

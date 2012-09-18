@@ -10,17 +10,7 @@
     :license: MIT.
 """
 
-class Settings(object):
-    DEBUG = False
-    TESTING = False
-    CASSANDRA_URI = None
-    
-    @classmethod
-    def override(clazz, settings):
-        clazz.DEBUG = settings['DEBUG']
-        clazz.TESTING = settings['TESTING']
-        clazz.CASSANDRA_URI = settings['CASSANDRA_URI']
-    
-class DefaultSettings(Settings):
+class DefaultSettings(object):
     DEBUG = True
+    TESTING = False
     CASSANDRA_URI = '127.0.0.1:9160'
