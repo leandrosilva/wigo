@@ -51,7 +51,7 @@ def before_request():
 
 
 #
-# API
+# API Request Handling
 #
 
 @app.route('/ping')
