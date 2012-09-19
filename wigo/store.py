@@ -11,7 +11,7 @@
 """
 
 from wigo.core import Error
-from wigo.cassandra import Database, Session
+from wigo.cassandra import Database, Connection
 
 
 #
@@ -48,8 +48,8 @@ class StateMachine(object):
         return [State(state_metadata) for state_metadata in states_metadata]
     
     def register_new(self):
-        with Database.open_session() as session:
-            state_machines_column_family = session.get_column_family('StateMachines')
+        with Database.open_connection() as conn:
+            state_machines_column_family = conn.get_column_family('StateMachines')
             
         return self.Name
 

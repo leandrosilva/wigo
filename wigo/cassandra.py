@@ -24,8 +24,8 @@ class Database(object):
         clazz.__create_schema()
     
     @classmethod
-    def open_session(clazz):
-        return Session(ConnectionPool('wigo', server_list=[clazz.__URI]))
+    def open_connection(clazz):
+        return Connection(ConnectionPool('wigo', server_list=[clazz.__URI]))
     
     @classmethod
     def __create_schema(clazz):
@@ -66,7 +66,7 @@ class Database(object):
         clazz.__create_column_family(system_manager, 'StateMachines')
         
 
-class Session(object):
+class Connection(object):
     def __init__(self, connection_pool):
         self.__connection_pool = connection_pool
     
