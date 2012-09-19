@@ -10,8 +10,8 @@
     :license: MIT.
 """
 
-from wigo.cassandra import Database
-from wigo.store import StateMachine
+from wigo.data.cassandra import Database
+from wigo.data.store import StateMachine
 
 from flask import Flask, request, jsonify, Response
 

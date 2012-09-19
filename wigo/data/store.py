@@ -11,7 +11,7 @@
 """
 
 from wigo.core import Error
-from wigo.cassandra import Database, Connection
+from wigo.data.cassandra import Database, Connection
 
 
 #
