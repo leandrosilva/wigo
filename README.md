@@ -37,6 +37,12 @@ You can override **wigo** default settings, whose which should never be used on 
 
 Of course, you might create different settings for each environment you target to run it, e.g. test, systems integration.
 
+## Running tests
+
+To run the test suite, you can simply:
+
+    $ WIGO_SETTINGS=test/integration/test.config python test/integration/web_application_test.py 
+
 ## Documentation
 
 * [API](https://github.com/leandrosilva/wigo/blob/master/doc/API.md)
