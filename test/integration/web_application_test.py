@@ -41,16 +41,13 @@ class WebApplicationTestCase(unittest.TestCase):
     def test_ping(self):
         rv = self.app.get('/ping')
         assert rv.status == '200 OK'
-        assert 'answer' in rv.data
-        assert 'pong' in rv.data
+        assert '"answer": "pong"' in rv.data
     
     def test_not_found(self):
         rv = self.app.get('/not/found')
         assert rv.status == '404 NOT FOUND'
-        assert 'message' in rv.data
-        assert 'Not Found' in rv.data
-        assert 'url' in rv.data
-        assert 'http://localhost/not/foun' in rv.data
+        assert '"message": "Not Found"' in rv.data
+        assert '"url": "http://localhost/not/found"' in rv.data
 
 
 if __name__ == '__main__':    
