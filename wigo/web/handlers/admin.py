@@ -13,7 +13,7 @@
 from flask import jsonify
 
 
-def build_routes_for_admin(app):
+def mont_routes_for_admin(app):
     @app.route('/ping')
     def ping():
         return jsonify(answer='pong')

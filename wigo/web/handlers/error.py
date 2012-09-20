@@ -13,7 +13,7 @@
 from flask import request, jsonify
 
 
-def build_routes_for_error(app):
+def mont_routes_for_error(app):
     @app.errorhandler(404)
     def not_found(error):
         return jsonify(message="Not Found", url=request.url), 404

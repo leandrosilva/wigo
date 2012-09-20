@@ -15,7 +15,7 @@ from wigo.data.store import StateMachine
 from flask import request, Response, jsonify
 
 
-def build_routes_for_statemachines(app):
+def mont_routes_for_statemachines(app):
     @app.route('/statemachines', methods=['POST'])
     def new_state_machine():
         app.logger.info(request.data)

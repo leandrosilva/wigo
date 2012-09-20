@@ -10,7 +10,7 @@
     :license: MIT.
 """
 
-from wigo.core import Error
+from wigo import Error
 from wigo.data.cassandra import Database, Connection
 
 

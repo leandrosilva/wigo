@@ -10,9 +10,9 @@
     :license: MIT.
 """
 
-from wigo.application import build_application
+from wigo.web import build_web_application
 
 
 if __name__ == '__main__':
-    app = build_application()
-    app.run()
+    web_app = build_web_application()
+    web_app.run()
