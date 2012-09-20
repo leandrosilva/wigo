@@ -10,9 +10,10 @@
     :license: MIT.
 """
 
-class Error(Exception):
-    def __init__(self, message):
-        self.message = message
-    
-    def __str__(self):
-        return message
+from flask import jsonify
+
+
+def build_routes_for_admin(app):
+    @app.route('/ping')
+    def ping():
+        return jsonify(answer='pong')

@@ -14,10 +14,6 @@ from wigo.core import Error
 from wigo.data.cassandra import Database, Connection
 
 
-#
-# Error
-#
-
 class MetadataError(Error):
     pass
 
@@ -25,10 +21,6 @@ class MetadataError(Error):
 class StoringError(Error):
     pass
 
-
-#
-# Model
-#
 
 class StateMachine(object):
     def __init__(self, metadata):
